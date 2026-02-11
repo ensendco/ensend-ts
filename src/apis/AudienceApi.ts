@@ -1,4 +1,4 @@
-import type { HttpClient } from "../lib/types";
+import type { HttpClient, HttpClientResponse } from "../lib/types";
 
 export class AudienceApi {
   constructor(private http: HttpClient) {}
@@ -20,7 +20,7 @@ export namespace TAudienceApi {
     sendConsentEmail: boolean;
   };
 
-  export type CreateProfileResponse = {
+  export type CreateProfileResponse = HttpClientResponse<{
     profile: {
       ref: string;
       name: string;
@@ -29,5 +29,5 @@ export namespace TAudienceApi {
       status: string;
       createdAt: string;
     };
-  };
+  }>;
 }

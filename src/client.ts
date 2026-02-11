@@ -1,14 +1,23 @@
 import fetch from "node-fetch-native";
 import { SendApi } from "./apis/SendApi";
-import type { ClientOptions, HttpClientOptions } from "./lib/types";
+import type {
+  ClientOptions,
+  HttpClientOptions,
+  HttpClientError,
+} from "./lib/types";
 
 export class Client<
   const I extends readonly string[],
   const T extends readonly string[],
 > {
   private ENSEND_BASE_URL =
-    process?.env?.ENSEND_BASE_URL || "https://api.ensend.co";
-  private PROJECT_SECRET = process?.env?.ENSEND_PROJECT_SECRET;
+    typeof process !== "undefined"
+      ? process.env.ENSEND_BASE_URL
+      : "https://api.ensend.co";
+  private PROJECT_SECRET =
+    typeof process !== "undefined"
+      ? process?.env?.ENSEND_PROJECT_SECRET
+      : undefined;
 
   constructor(options?: ClientOptions<I, T>) {
     if (options?.secret) {
@@ -50,4 +59,5 @@ export class Client<
   SendApi = new SendApi<I, T>(this.http);
 }
 
+export type EnsendError = HttpClientError;
 export type { TSendApi as SendApi } from "./apis/SendApi";

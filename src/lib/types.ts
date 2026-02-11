@@ -10,11 +10,16 @@ export type HttpClientResponse<T = undefined> = {
   data: T;
 } | null;
 
-export type HttpClient = <T extends Record<string, any>>(
+export type HttpClientError = {
+  message: string;
+  statusCode: number;
+} | null;
+
+export type HttpClient = <T extends HttpClientResponse<Record<string, any>>>(
   body: HttpClientOptions,
 ) => Promise<{
-  data: HttpClientResponse<T>;
-  error: HttpClientResponse;
+  data: T;
+  error: HttpClientError;
 }>;
 
 export type ClientOptions<
