@@ -7,8 +7,8 @@ export class Client<
   const T extends readonly string[],
 > {
   private ENSEND_BASE_URL =
-    process.env.ENSEND_BASE_URL || "https://api.ensend.co";
-  private PROJECT_SECRET = process.env.ENSEND_PROJECT_SECRET;
+    process?.env?.ENSEND_BASE_URL || "https://api.ensend.co";
+  private PROJECT_SECRET = process?.env?.ENSEND_PROJECT_SECRET;
 
   constructor(options?: ClientOptions<I, T>) {
     if (options?.secret) {
