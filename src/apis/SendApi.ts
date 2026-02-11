@@ -1,4 +1,4 @@
-import type { HttpClient } from "../lib/types";
+import type { HttpClient, HttpClientResponse } from "../lib/types";
 
 export class SendApi<
   const I extends readonly string[],
@@ -137,9 +137,9 @@ export namespace TSendApi {
     "message" | "template"
   >;
 
-  export type SendMailMessageResponse = {
+  export type SendMailMessageResponse = HttpClientResponse<{
     ref: string;
-  };
+  }>;
 
   export type SendMailBroadcastDto<
     I extends readonly string[] = [],
@@ -212,10 +212,10 @@ export namespace TSendApi {
         }>;
   };
 
-  export type SendMailBroadcastResponse = {
+  export type SendMailBroadcastResponse = HttpClientResponse<{
     broadcast: {
       ref: string;
       status: string;
     };
-  };
+  }>;
 }
