@@ -1,7 +1,9 @@
 {
   "name": "ensend",
-  "version": "0.0.0",
-  "description": "TS/JS SDK for the new Ensend API",
+  "version": "0.0.1",
+  "type": "module",
+  "private": "false",
+  "description": "Official Typescript/Javascript SDK for the new Ensend API. See completed documentation at https://docs.ensend.co",
   "main": "dist/client.js",
   "exports": {
     ".": {
@@ -23,7 +25,14 @@
   ],
   "author": "Tenotea (https://github.com/tenotea)",
   "license": "MIT",
-  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ensendco/ensend-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ensendco/ensend-ts/issues"
+  },
+  "homepage": "https://github.com/ensendco/ensend-ts#readme",
   "dependencies": {
     "node-fetch-native": "^1.6.7"
   },
