@@ -1,6 +1,6 @@
 {
   "name": "ensend",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "private": false,
   "description": "Official Typescript/Javascript SDK for the new Ensend API. See completed documentation at https://docs.ensend.co",
