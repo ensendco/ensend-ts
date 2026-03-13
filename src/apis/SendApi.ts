@@ -85,6 +85,20 @@ export namespace TSendApi {
       [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>;
     }[Keys];
 
+  type RecipientType =
+    | string
+    | string[]
+    | {
+        address: string;
+        name?: string;
+        variables?: Record<string, string | number>;
+      }
+    | Array<{
+        address: string;
+        name?: string;
+        variables?: Record<string, string | number>;
+      }>;
+
   export type SendMailMessageDto<
     I extends readonly string[] = [],
     T extends readonly string[] = [],
@@ -96,17 +110,7 @@ export namespace TSendApi {
           name?: string;
           address: I[number];
         };
-    recipients:
-      | string
-      | string[]
-      | {
-          name?: string;
-          address: string;
-        }
-      | Array<{
-          name?: string;
-          address: string;
-        }>;
+    recipients: RecipientType;
     replyAddress?: string;
     attachments?: Array<
       { name: string } & RequiresAtLeastOne<
@@ -130,7 +134,7 @@ export namespace TSendApi {
     {
       message: string;
       template: {
-        id: T[number];
+        ref: T[number];
         variables?: Record<string, string>;
       };
     },
@@ -176,40 +180,20 @@ export namespace TSendApi {
     {
       message: string;
       template: {
-        id: T[number];
+        ref: T[number];
         variables?: Record<string, string>;
       };
     },
     "message" | "template"
   > &
     RequiresAtLeastOne<{
-      recipients:
-        | string
-        | string[]
-        | {
-            name?: string;
-            address: string;
-          }
-        | Array<{
-            name?: string;
-            address: string;
-          }>;
+      recipients: RecipientType;
       audience: string[];
     }>;
 
   export type SendExistingMailBroadcastDto = {
     broadcastRef: string;
-    recipients?:
-      | string
-      | string[]
-      | {
-          name?: string;
-          address: string;
-        }
-      | Array<{
-          name?: string;
-          address: string;
-        }>;
+    recipients?: RecipientType;
   };
 
   export type SendMailBroadcastResponse = HttpClientResponse<{
